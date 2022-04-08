@@ -5,7 +5,7 @@ import io.camunda.zeebe.client.ZeebeClient;
 public class ParallelWorker {
     public static void main(String[] args) {
 
-        ZeebeClient client = ZeebeClient.newClientBuilder().usePlaintext().build();
+        ZeebeClient client = ZeebeClient.newClientBuilder().numJobWorkerExecutionThreads(5).usePlaintext().build();
 
         client.newWorker().jobType("parallel-task").handler((jobClient, job) -> {
             int time = (Integer) job.getVariablesAsMap().get("time");
